@@ -47,14 +47,25 @@ class GameTest {
     }
 
     @Test
-    public void testNotRegisteredPlayer() {
+    public void testNotRegistered1Player() {
         Game game = new Game();
         Player player1 = new Player(1, "B", 100);
         Player player2 = new Player(2, "C", 100);
 
         game.register(player1);
 
-        assertThrows(NotRegisteredException.class, () -> {game.round("A","B");});
+        assertThrows(NotRegisteredException.class, () -> {game.round("B","C");});
+
+    }
+    @Test
+    public void testNotRegistered2Player() {
+        Game game = new Game();
+        Player player1 = new Player(1, "B", 100);
+        Player player2 = new Player(2, "C", 100);
+
+        game.register(player2);
+
+        assertThrows(NotRegisteredException.class, () -> {game.round("B","C");});
 
     }
 }
