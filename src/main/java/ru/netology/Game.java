@@ -1,39 +1,34 @@
 package ru.netology;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Game {
-    List<Player> players = new ArrayList<>();
+    Map<String, Player> players = new HashMap<>();
 
-        public void register(Player player) {
-            players.add(player);
-        }
+    public void register(Player player) {
+        players.put(player.getName(),player);
+    }
     public Player findByName(String name) {
-        for (Player player : players) {
-            if (player.getName().equals(name)) {
-                return player;
-            }
-        }
-        return null;
+        return players.get(name);
     }
 
 
-   public int round (String playerName1, String playerName2) throws Throwable {
-        Player player1 = findByName(playerName1) ;
-       Player player2 = findByName(playerName2);
-       if (player1 == null) {
-           throw new NotRegisteredException(playerName1 + " не зарегистрирован");
-       }
-       if (player2 == null) {
-           throw new NotRegisteredException(playerName2 + " не зарегистрирован");
-       }
-       if (player1.getStrength() > player2.getStrength()) {
-           return 1;
-       } else if (player1.getStrength() < player2.getStrength()) {
-           return 2;
-       } else {
-           return 0;
-       }
-   }
+    public int round(String playerName1, String playerName2) throws Throwable {
+        Player player1 = findByName(playerName1);
+        Player player2 = findByName(playerName2);
+        if (player1 == null) {
+            throw new NotRegisteredException(playerName1 + " не зарегистрирован");
+        }
+        if (player2 == null) {
+            throw new NotRegisteredException(playerName2 + " не зарегистрирован");
+        }
+        if (player1.getStrength() > player2.getStrength()) {
+            return 1;
+        } else if (player1.getStrength() < player2.getStrength()) {
+            return 2;
+        } else {
+            return 0;
+        }
+    }
 }
